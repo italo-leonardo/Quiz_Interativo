@@ -31,7 +31,7 @@ const dadosQuiz = [
     }
 ];
 
-let perguntaAtual = 0, pontuacao = 0, respondido = false;
+let perguntaAtual = 0, pontuacaoJogador1 = 0, pontuacaoJogador2 = 0;
 let tempoInicio, tempoFim;
 
 // Inicia o quiz
@@ -44,7 +44,6 @@ function iniciarQuiz() {
 
 // Carrega a pergunta atual
 function carregarPergunta() {
-    respondido = false;
     const { pergunta, opcoes } = dadosQuiz[perguntaAtual];
     document.getElementById('pergunta').textContent = pergunta;
 
@@ -55,12 +54,17 @@ function carregarPergunta() {
     });
 
     desativarBotao('botao-proxima', true);
+    atualizarVezJogador();
+}
+
+// Atualiza a vez do jogador
+function atualizarVezJogador() {
+    const vezJogador = perguntaAtual % 2 === 0 ? "Vez do Jogador 1" : "Vez do Jogador 2";
+    document.getElementById('vez-jogador').textContent = vezJogador;
 }
 
 // Seleciona a resposta
 function selecionarResposta(selecionado) {
-    if (respondido) return;
-    respondido = true;
     const elementosOpcoes = document.getElementsByClassName('opcao');
     const respostaCorreta = dadosQuiz[perguntaAtual].correto;
 
@@ -69,13 +73,21 @@ function selecionarResposta(selecionado) {
         botao.disabled = true;
     });
 
-    if (selecionado === respostaCorreta) pontuacao++;
+    if (selecionado === respostaCorreta) {
+        if (perguntaAtual % 2 === 0) { // Jogador 1 responde perguntas pares
+            pontuacaoJogador1++;
+        } else { // Jogador 2 responde perguntas ímpares
+            pontuacaoJogador2++;
+        }
+    }
+
     desativarBotao('botao-proxima', false);
 }
 
 // Próxima pergunta ou resultado
 function proximaPergunta() {
     perguntaAtual++;
+
     if (perguntaAtual < dadosQuiz.length) {
         carregarPergunta();
     } else {
@@ -90,16 +102,26 @@ function mostrarResultado() {
 
     trocarVisibilidade('container-quiz', 'none');
     trocarVisibilidade('container-resultado', 'block');
-    document.getElementById('pontuacao').textContent = pontuacao;
-    const mensagens = ["Você pode melhorar!", "Bom resultado!", "Uau! Excelente resultado!"];
-    document.getElementById('feedback').textContent = mensagens[Math.min(Math.floor(pontuacao / 2), 2)];
 
+    document.getElementById('pontuacao-jogador1').textContent = pontuacaoJogador1;
+    document.getElementById('pontuacao-jogador2').textContent = pontuacaoJogador2;
+
+    let vencedor;
+    if (pontuacaoJogador1 > pontuacaoJogador2) {
+        vencedor = "Jogador 1 venceu!";
+    } else if (pontuacaoJogador2 > pontuacaoJogador1) {
+        vencedor = "Jogador 2 venceu!";
+    } else {
+        vencedor = "Empate!";
+    }
+
+    document.getElementById('vencedor').textContent = vencedor;
     document.getElementById('tempo').textContent = `Tempo gasto: ${tempoTotal} segundos`;
 }
 
 // Reinicia o quiz
 function reiniciarQuiz() {
-    perguntaAtual = pontuacao = 0;
+    perguntaAtual = pontuacaoJogador1 = pontuacaoJogador2 = 0;
     trocarVisibilidade('container-resultado', 'none');
     trocarVisibilidade('container-inicial', 'block');
 }

@@ -3,23 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Senhor dos Anéis</title>
+    <title>Quiz Versus</title>
     <link rel="stylesheet" href="estilo/style.css">
     <script defer src="script.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Quiz Senhor dos Anéis</h1>
-        
-        <!-- Container Inicial -->
+        <h1>Quiz Versus</h1>
         <div id="container-inicial">
             <button id="botao-iniciar" onclick="iniciarQuiz()">Iniciar Quiz</button>
         </div>
-        
-        <!-- Container do Quiz -->
         <div id="container-quiz" style="display:none;">
+            <div id="vez-jogador">Vez do Jogador 1</div>
             <div id="pergunta"></div>
-            <div class="opcoes">
+            <div class="options">
                 <button class="opcao" onclick="selecionarResposta(0)"></button>
                 <button class="opcao" onclick="selecionarResposta(1)"></button>
                 <button class="opcao" onclick="selecionarResposta(2)"></button>
@@ -27,11 +24,11 @@
             </div>
             <button id="botao-proxima" onclick="proximaPergunta()" disabled>Próxima Pergunta</button>
         </div>
-        
-        <!-- Container de Resultado -->
         <div id="container-resultado" style="display:none;">
-            <h2>Seu Resultado: <span id="pontuacao"></span> de 6</h2>
-            <p id="feedback"></p>
+            <h2>Resultados</h2>
+            <p>Jogador 1: <span id="pontuacao-jogador1">0</span></p>
+            <p>Jogador 2: <span id="pontuacao-jogador2">0</span></p>
+            <h3 id="vencedor"></h3>
             <p id="tempo"></p>
             <button id="botao-reiniciar" onclick="reiniciarQuiz()">Reiniciar Quiz</button>
         </div>
