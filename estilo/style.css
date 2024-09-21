@@ -2,45 +2,45 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  body {
+}
+
+body {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
-  }
-  
-  .container {
+}
+
+.container {
     text-align: center;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1 {
+}
+
+h1 {
     margin-bottom: 20px;
-  }
-  
-  #start-container {
+}
+
+#container-inicial {
     margin-bottom: 20px;
-  }
-  
-  #quiz-container, #result-container {
+}
+
+#container-quiz, #container-resultado {
     margin-top: 20px;
-  }
-  
-  .options {
+}
+
+.opcoes {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-bottom: 20px;
-  }
-  
-  button {
+}
+
+button {
     padding: 10px;
     background-color: #007bff;
     color: white;
@@ -48,38 +48,36 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-  }
-  
-  button:hover {
+}
+
+button:hover {
     background-color: #0056b3;
-  }
-  
-  button:disabled {
+}
+
+button:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
-  }
-  
-  #result-container h2 {
+}
+
+#container-resultado h2 {
     font-size: 24px;
     margin-bottom: 10px;
-  }
-  
-  #feedback {
+}
+
+#feedback, #tempo {
     font-size: 18px;
     margin-bottom: 20px;
-  }
-  
-  /* Adicione essas classes aqui */
-  button.correct {
+}
+
+button.correct {
     background-color: green;
-  }
-  
-  button.incorrect {
+}
+
+button.incorrect {
     background-color: red;
-  }
-  
-  button:disabled {
+}
+
+button:disabled {
     cursor: not-allowed;
     background-color: #cccccc;
-  }
-  
+}
