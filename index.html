@@ -1,17 +1,35 @@
 <!DOCTYPE html>
-<html lang="pt-bt">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto QUIZ</title>
-    <link rel="stylesheet" href="estilo/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Simples</title>
+  <link rel="stylesheet" href="estilo/style.css">
+  <script defer src="script.js"></script>
 </head>
 <body>
-    <main>
-        <header>
-            <h1>Teste de projeto</h1>
-            <h1>Ola Mundo</h1>
-        </header>
-    </main>
+  <div class="container">
+    <h1>Quiz</h1>
+    <!-- Adiciona o botão "Iniciar" -->
+    <div id="container-inicial">
+      <button id="botao-iniciar" onclick="iniciarQuiz()">Iniciar Quiz</button>
+    </div>
+    <div id="container-quiz" style="display:none;">
+      <div id="pergunta"></div>
+      <div class="opcoes">
+        <button class="opcao" onclick="selecionarResposta(0)"></button>
+        <button class="opcao" onclick="selecionarResposta(1)"></button>
+        <button class="opcao" onclick="selecionarResposta(2)"></button>
+        <button class="opcao" onclick="selecionarResposta(3)"></button>
+      </div>
+      <button id="botao-proxima" onclick="proximaPergunta()">Próxima Pergunta</button>
+    </div>
+    <div id="container-resultado" style="display:none;">
+      <h2>Seu Resultado: <span id="pontuacao"></span> de 12</h2>
+      <p id="feedback"></p>
+      <button id="botao-reiniciar" onclick="reiniciarQuiz()">Reiniciar Quiz</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
