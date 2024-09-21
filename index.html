@@ -8,28 +8,35 @@
   <script defer src="script.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>Quiz</h1>
-    <!-- Adiciona o botão "Iniciar" -->
-    <div id="container-inicial">
+  <main class="container">
+    <header>
+      <h1>Quiz</h1>
+    </header>
+
+    <section id="container-inicial">
       <button id="botao-iniciar" onclick="iniciarQuiz()">Iniciar Quiz</button>
-    </div>
-    <div id="container-quiz" style="display:none;">
-      <div id="pergunta"></div>
+    </section>
+
+    <section id="container-quiz" style="display:none;" aria-live="polite">
+      <article id="pergunta"></article>
       <div class="opcoes">
-        <button class="opcao" onclick="selecionarResposta(0)"></button>
-        <button class="opcao" onclick="selecionarResposta(1)"></button>
-        <button class="opcao" onclick="selecionarResposta(2)"></button>
-        <button class="opcao" onclick="selecionarResposta(3)"></button>
+        <button class="opcao" onclick="selecionarResposta(0)">Opção 1</button>
+        <button class="opcao" onclick="selecionarResposta(1)">Opção 2</button>
+        <button class="opcao" onclick="selecionarResposta(2)">Opção 3</button>
+        <button class="opcao" onclick="selecionarResposta(3)">Opção 4</button>
       </div>
-      <button id="botao-proxima" onclick="proximaPergunta()">Próxima Pergunta</button>
-    </div>
-    <div id="container-resultado" style="display:none;">
-      <h2>Seu Resultado: <span id="pontuacao"></span> de 12</h2>
+      <button id="botao-proxima" onclick="mostrarProximaPergunta()">Próxima Pergunta</button>
+    </section>
+
+    <section id="container-resultado" style="display:none;" aria-live="polite">
+      <h2>Seu Resultado: <span id="pontuacao"></span> de 6</h2>
       <p id="feedback"></p>
       <button id="botao-reiniciar" onclick="reiniciarQuiz()">Reiniciar Quiz</button>
-    </div>
-  </div>
-  <script src="script.js"></script>
+    </section>
+
+    <footer>
+      <p>Quiz desenvolvido por Projeto 6</p>
+    </footer>
+  </main>
 </body>
 </html>

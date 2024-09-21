@@ -1,106 +1,110 @@
 // Dados do quiz
 const dadosQuiz = [
     {
-      pergunta: "Qual filme de 2023 foi dirigido por Greta Gerwig e é baseado em uma famosa boneca?",
-      opcoes: ["Barbie", "Oppenheimer", "Avatar 2", "Duna"],
-      correto: 0
+      pergunta: "Quem escreveu a trilogia Senhor dos Anéis?",
+      opcoes: ["Jonh Grogan", "J.R.R Tolkien", "J.A.R Tolkien", "Morgan Freeman"],
+      correto: 1
     },
     {
-      pergunta: "Qual foi o último filme da franquia 'Missão Impossível', lançado em 2023?",
-      opcoes: ["Efeito Fallout", "Nação Secreta", "Protocolo Fantasma", "Acerto de Contas - Parte 1"],
+      pergunta: "Como Isildur pegou o anel de Sauron?",
+      opcoes: ["Pedindo", "Cortando a mão dele", "Roubando", "Encontrou na roupa dele"],
+      correto: 1
+    },
+    {
+      pergunta: "Qual o nome da montanha que Smaug dominou e os anões querem de volta?",
+      opcoes: ["Montanha Sombria", "Montanha da Névoa", "Condado", "Erebor"],
       correto: 3
     },
-    // Adicione as demais perguntas aqui
+    {
+      pergunta: "O que Bilbo Bolseiro encontra na Montanha da Névoa?",
+      opcoes: ["Sua espada", "Uma bússola", "Um anel", "Uma capa"],
+      correto: 2
+    },
+    {
+      pergunta: "Quantas raças de Hobbit existiam?",
+      opcoes: ["1", "2", "3", "4"],
+      correto: 2
+    },
+    {
+      pergunta: "Para onde Gandalf, Galadriel, Elrond, Frodo e Bilbo foram no final de 'O Retorno do Rei'?",
+      opcoes: ["Para Mordor", "Para o Condado", "Para Minas Tirith", "Para a Terra dos Elfos"],
+      correto: 3
+    }
   ];
   
-  let perguntaAtual = 0;
-  let pontuacao = 0;
-  let respondido = false;
+  let perguntaAtual = 0, pontuacao = 0, respondido = false;
   
-  // Função que inicia o quiz e esconde o botão "Iniciar"
+  // Inicia o quiz
   function iniciarQuiz() {
-    document.getElementById('container-inicial').style.display = 'none';
-    document.getElementById('container-quiz').style.display = 'block';
+    trocarVisibilidade('container-inicial', 'none');
+    trocarVisibilidade('container-quiz', 'block');
     carregarPergunta();
   }
   
   // Carrega a pergunta atual
   function carregarPergunta() {
     respondido = false;
-    const elementoPergunta = document.getElementById('pergunta');
-    const elementosOpcoes = document.getElementsByClassName('opcao');
+    const { pergunta, opcoes } = dadosQuiz[perguntaAtual];
+    document.getElementById('pergunta').textContent = pergunta;
   
-    elementoPergunta.textContent = dadosQuiz[perguntaAtual].pergunta;
+    Array.from(document.getElementsByClassName('opcao')).forEach((botao, i) => {
+      botao.textContent = opcoes[i];
+      botao.style.backgroundColor = '';
+      botao.disabled = false;
+    });
   
-    for (let i = 0; i < elementosOpcoes.length; i++) {
-      elementosOpcoes[i].textContent = dadosQuiz[perguntaAtual].opcoes[i];
-      elementosOpcoes[i].style.backgroundColor = '';
-      elementosOpcoes[i].disabled = false;
-    }
+    desativarBotao('botao-proxima', true);
   }
   
-  // Manipula a seleção de resposta
+  // Seleciona resposta
   function selecionarResposta(selecionado) {
     if (respondido) return;
     respondido = true;
-    
-    const elementosOpcoes = document.getElementsByClassName('opcao');
+  
     const respostaCorreta = dadosQuiz[perguntaAtual].correto;
+    Array.from(document.getElementsByClassName('opcao')).forEach((botao, i) => {
+      botao.style.backgroundColor = i === respostaCorreta ? 'green' : (i === selecionado ? 'red' : '');
+      botao.disabled = true;
+    });
   
-    for (let i = 0; i < elementosOpcoes.length; i++) {
-      if (i === respostaCorreta) {
-        elementosOpcoes[i].style.backgroundColor = 'green';
-      } else if (i === selecionado) {
-        elementosOpcoes[i].style.backgroundColor = 'red';
-      }
-      elementosOpcoes[i].disabled = true;
-    }
-  
-    if (selecionado === respostaCorreta) {
-      pontuacao++;
-    }
-  
-    document.getElementById('botao-proxima').disabled = false;
+    if (selecionado === respostaCorreta) pontuacao++;
+    desativarBotao('botao-proxima', false);
   }
   
-  // Vai para a próxima pergunta
-  function proximaPergunta() {
+  // Próxima pergunta ou resultado
+  function mostrarProximaPergunta() {
     perguntaAtual++;
     if (perguntaAtual < dadosQuiz.length) {
       carregarPergunta();
-      document.getElementById('botao-proxima').disabled = true;
     } else {
       mostrarResultado();
     }
   }
   
-  // Exibe o resultado e a mensagem personalizada
+  // Mostra resultado final
   function mostrarResultado() {
-    document.getElementById('container-quiz').style.display = 'none';
-    document.getElementById('container-resultado').style.display = 'block';
-    
-    const feedback = document.getElementById('feedback');
+    trocarVisibilidade('container-quiz', 'none');
+    trocarVisibilidade('container-resultado', 'block');
     document.getElementById('pontuacao').textContent = pontuacao;
-    
-    if (pontuacao <= 4) {
-      feedback.textContent = "Você pode melhorar!";
-    } else if (pontuacao <= 7) {
-      feedback.textContent = "Bom resultado!";
-    } else {
-      feedback.textContent = "Uau! Excelente resultado!";
-    }
+  
+    const mensagens = ["Você pode melhorar!", "Bom resultado!", "Uau! Excelente resultado!"];
+    document.getElementById('feedback').textContent = mensagens[Math.min(Math.floor(pontuacao / 4), 2)];
   }
   
   // Reinicia o quiz
   function reiniciarQuiz() {
-    perguntaAtual = 0;
-    pontuacao = 0;
-    document.getElementById('container-resultado').style.display = 'none';
-    document.getElementById('container-inicial').style.display = 'block';
+    perguntaAtual = pontuacao = 0;
+    trocarVisibilidade('container-resultado', 'none');
+    trocarVisibilidade('container-inicial', 'block');
   }
   
-  // Inicializa o quiz
-  document.addEventListener('load', function () {
-    document.getElementById('botao-proxima').disabled = true;
-  });
+  // Utilitários
+  function trocarVisibilidade(id, display) {
+    document.getElementById(id).style.display = display;
+  }
+  
+  function desativarBotao(id, estado) {
+    document.getElementById(id).disabled = estado;
+  }
+
   
