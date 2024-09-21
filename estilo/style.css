@@ -4,8 +4,13 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: Ringbearer;
+    src: url(RINGM___.TTF);
+}
+
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: Ringbearer;
     display: flex;
     justify-content: center;
     align-items: center;
