@@ -28,6 +28,26 @@ const dadosQuiz = [
         pergunta: "Para onde Gandalf, Galadriel, Elrond, Frodo e Bilbo foram no final do filme 'O Retorno do Rei'?",
         opcoes: ["Para Mordor", "Para o Condado", 'Para Minas Tirith', 'Para a Terra dos Elfos'],
         correto: 3
+    },
+    {
+        pergunta: "Qual é a palavra élfica para “amigo” que abre a porta para as Minas de Moria?",
+        opcoes: ["Mellon", "Mithrandir", 'Naur', 'Elen síla lúmenn’ omentielvo'],
+        correto: 0
+    },
+    {
+        pergunta: "Que criatura morde o dedo de Frodo?",
+        opcoes: ["Gollum", "Saruman", 'Shelob', ' Balrog'],
+        correto: 0
+    },
+    {
+        pergunta: "Quem é Tom Bombadil?",
+        opcoes: ["Um elfo sábio", "Um mago poderoso", 'Um ent antigo', ' Um enigma misterioso'],
+        correto: 3
+    },
+    {
+        pergunta: "Qual é melhor?",
+        opcoes: ["Harry Potter", "O Senhor dos Anéis", 'Star Wars', 'Star Trek'],
+        correto: 1
     }
 ];
 
